@@ -1,6 +1,7 @@
 package com.dwarfstar.gpd.onlinenotifier;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -46,15 +47,19 @@ public class KontoretActivity extends AppCompatActivity {
         mNavigationView = findViewById(R.id.bottom_nav_bar);
 
         loadJSONOffice();
-        checkResponsibility();
-        loadJSONCantina();
+        //checkResponsibility();
+        //loadJSONCantina();
 
-        mCoffeeTime.setText(getResources().getString(R.string.coffee_last_made, mCoffee.getTime()));
-        mCoffeeAmount.setText(getResources().getString(R.string.coffee_pots_text, mCoffee.getPots()));
+        try {
+            mCoffeeTime.setText(getResources().getString(R.string.coffee_last_made, mCoffee.getTime()));
+            mCoffeeAmount.setText(getResources().getString(R.string.coffee_pots_text, mCoffee.getPots()));
+        } catch (Exception e) {
+            mCoffeeAmount.setText("The API Might be down, sorry for the inconvenience");
+        }
         //FragmentManager fragmentManager = getSupportFragmentManager();
         //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        /*mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 final String MEETING = getString(R.string.meetings_menu), CANTINA = getString(R.string.cantina_menu);
@@ -73,7 +78,7 @@ public class KontoretActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });
+        });*/
 
     }
 
@@ -83,19 +88,25 @@ public class KontoretActivity extends AppCompatActivity {
     }
 
     private void loadJSONOffice() {
-        NotifierJSONDecode fetchData = new NotifierJSONDecode();
-        try {
-            Void result = fetchData.execute().get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-        mOffice = fetchData.getOffice();
-        mCoffee = mOffice.getCoffee();
-        mServant = mOffice.getServant();
-        mStatus = mOffice.getStatus();
-        mMeetings = mOffice.getMeetings();
+        final Handler handler = new Handler();
+        final NotifierJSONDecode fetchData = new NotifierJSONDecode();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Void result = fetchData.execute().get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                mOffice = fetchData.getOffice();
+                mCoffee = mOffice.getCoffee();
+                mServant = mOffice.getServant();
+                mStatus = mOffice.getStatus();
+                mMeetings = mOffice.getMeetings();
+            }
+        }, 5000);
     }
 
     private void checkResponsibility() {

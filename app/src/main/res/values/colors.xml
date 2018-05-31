@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="online_blue">#0060A3</color>
+    <color name="online_darker_blue">#07244C</color>
+    <color name="online_orange">#FAA21B</color>
+    <color name="online_dark_blue">#033A7F</color>
+</resources>

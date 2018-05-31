@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/online_darker_blue">
+
+    <LinearLayout
+        android:id="@+id/coffee_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="@color/online_dark_blue"
+        android:elevation="5dp"
+        >
+
+        <TextView
+            android:id="@+id/coffe_last_made"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/coffee_last_made_time_hint"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/coffe_pots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/coffee_pots_made_hint"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/servantsFragment"
+        android:layout_below="@id/coffee_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:layout_above="@+id/bottom_nav_bar">
+
+    </android.support.v7.widget.RecyclerView>
+    <!--
+    <fragment
+        android:name="com.dwarfstar.gpd.onlinenotifier.ServantsFragment"
+        android:layout_below="@id/coffee_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </fragment>
+    -->
+    <TextView
+        android:id="@+id/no_servants"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/coffee_info"
+        android:textAlignment="center"
+        android:gravity="center_vertical"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"/>
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_nav_bar"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/screen_navigation"
+        >
+    </android.support.design.widget.BottomNavigationView>
+
+</RelativeLayout>

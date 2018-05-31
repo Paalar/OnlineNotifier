@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">OnlineNotifier</string>
+
+    <!-- Navigation bar -->
+    <string name="office_menu">Kontoret</string>
+    <string name="cantina_menu">Kantiner</string>
+    <string name="meetings_menu">Møter</string>
+
+
+    <!-- Servant row -->
+    <string name="servant_name_hint">Pål-Edward Larsen</string>
+    <string name="from_to">Fra:\t%s\nTil:\t\t%s</string>
+
+    <!-- Coffee -->
+    <string name="coffee_pots_made_hint">10</string>
+    <string name="coffee_last_made_time_hint">13:42</string>
+    <string name="coffee_pots_text">Det har blitt laget %d kanner i dag</string>
+    <string name="coffee_last_made">Kaffen ble sist laget %s</string>
+
+    <!-- Meetings -->
+    <string name="meeting_text_hint">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="office_is_free">Kontoret er ledig</string>
+    <string name="office_is_busy">Kontoret er opptatt</string>
+
+
+</resources>

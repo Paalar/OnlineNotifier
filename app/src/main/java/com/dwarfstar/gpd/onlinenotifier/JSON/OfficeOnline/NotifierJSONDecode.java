@@ -2,8 +2,10 @@ package com.dwarfstar.gpd.onlinenotifier.JSON.OfficeOnline;
 
 import android.os.AsyncTask;
 import android.util.JsonReader;
+import android.util.JsonToken;
 
 import org.json.JSONException;
+import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -214,8 +216,10 @@ public class NotifierJSONDecode extends AsyncTask<Void, Void, Void> {
             String name = reader.nextName();
             switch (name) {
                 case DATE:
-                    if(!(reader.peek() == null)) {
+                    if(reader.peek() != JsonToken.NULL) {
                         date = parseDate(reader.nextString());
+                    } else {
+                        reader.skipValue();
                     }
                     break;
                 case POTS:
@@ -241,10 +245,18 @@ public class NotifierJSONDecode extends AsyncTask<Void, Void, Void> {
             String name = reader.nextName();
             switch (name) {
                 case STATUS:
-                    status = reader.nextBoolean();
+                    if (reader.peek() != JsonToken.NULL) {
+                        status = reader.nextBoolean();
+                    } else {
+                        reader.skipValue();
+                    }
                     break;
                 case UPDATED:
-                    updated = reader.nextString();
+                    if (reader.peek() != JsonToken.NULL) {
+                        updated = reader.nextString();
+                    } else {
+                        reader.skipValue();
+                    }
                     break;
                 default:
                     reader.skipValue();

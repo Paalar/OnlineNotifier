@@ -47,19 +47,23 @@ public class KontoretActivity extends AppCompatActivity {
         mNavigationView = findViewById(R.id.bottom_nav_bar);
 
         loadJSONOffice();
-        //checkResponsibility();
-        //loadJSONCantina();
+        checkResponsibility();
+        loadJSONCantina();
 
         try {
-            mCoffeeTime.setText(getResources().getString(R.string.coffee_last_made, mCoffee.getTime()));
-            mCoffeeAmount.setText(getResources().getString(R.string.coffee_pots_text, mCoffee.getPots()));
+            if (mCoffee.getDate() != null) {
+                mCoffeeTime.setText(getResources().getString(R.string.coffee_last_made, mCoffee.getTime()));
+                mCoffeeAmount.setText(getResources().getString(R.string.coffee_pots_text, mCoffee.getPots()));
+            } else {
+                mCoffeeTime.setText(getResources().getString(R.string.coffee_last_made_null));
+            }
         } catch (Exception e) {
-            mCoffeeAmount.setText("The API Might be down, sorry for the inconvenience");
+            mCoffeeAmount.setText("Something went wrong, sorry for the inconvenience");
         }
         //FragmentManager fragmentManager = getSupportFragmentManager();
         //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        /*mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        mNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 final String MEETING = getString(R.string.meetings_menu), CANTINA = getString(R.string.cantina_menu);
@@ -78,7 +82,7 @@ public class KontoretActivity extends AppCompatActivity {
                 }
                 return false;
             }
-        });*/
+        });
 
     }
 
@@ -88,7 +92,7 @@ public class KontoretActivity extends AppCompatActivity {
     }
 
     private void loadJSONOffice() {
-        final Handler handler = new Handler();
+        /*final Handler handler = new Handler();
         final NotifierJSONDecode fetchData = new NotifierJSONDecode();
         handler.postDelayed(new Runnable() {
             @Override
@@ -106,7 +110,20 @@ public class KontoretActivity extends AppCompatActivity {
                 mStatus = mOffice.getStatus();
                 mMeetings = mOffice.getMeetings();
             }
-        }, 5000);
+        }, 5000);*/
+        final NotifierJSONDecode fetchData = new NotifierJSONDecode();
+        try {
+            Void result = fetchData.execute().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        mOffice = fetchData.getOffice();
+        mCoffee = mOffice.getCoffee();
+        mServant = mOffice.getServant();
+        mStatus = mOffice.getStatus();
+        mMeetings = mOffice.getMeetings();
     }
 
     private void checkResponsibility() {

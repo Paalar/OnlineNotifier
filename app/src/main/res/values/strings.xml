@@ -16,6 +16,7 @@
     <string name="coffee_last_made_time_hint">13:42</string>
     <string name="coffee_pots_text">Det har blitt laget %d kanner i dag</string>
     <string name="coffee_last_made">Kaffen ble sist laget %s</string>
+    <string name="coffee_last_made_null">Kaffe har ikke blitt laget enda</string>
 
     <!-- Meetings -->
     <string name="meeting_text_hint">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>

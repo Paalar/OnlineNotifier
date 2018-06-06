@@ -31,7 +31,6 @@
             android:id="@+id/coffe_pots"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/coffee_pots_made_hint"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="24sp" />
